@@ -32,6 +32,7 @@ namespace Bookshop
                     Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultUI();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -57,6 +58,7 @@ namespace Bookshop
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,5 +1,6 @@
 ﻿using Bookshop.Data;
 using Bookshop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Bookshop.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class BookController : Controller
     {
         private readonly ApplicationDbContext _db;
