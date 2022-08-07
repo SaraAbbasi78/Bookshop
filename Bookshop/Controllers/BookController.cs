@@ -1,6 +1,7 @@
 ﻿using Bookshop.Data;
 using Bookshop.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,35 @@ namespace Bookshop.Controllers
         public IActionResult Create(Book model)
         {
             _db.Books.Add(model);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Details(int id)
+        {
+            var model = _db.Books.Find(id);
+            return View(model);
+        }
+        public IActionResult Edit(int id)
+        {
+            var model = _db.Books.Find(id);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Edit(Book model)
+        {
+            _db.Entry(model).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Delete(int id)
+        {
+            var model = _db.Books.Find(id);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Delete(Book model)
+        {
+            _db.Entry(model).State = EntityState.Deleted;
             _db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
